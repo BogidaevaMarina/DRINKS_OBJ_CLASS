@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRINKS_OBJ_CLASS</title>
+  </head>
+  <body>
+    <button onclick="addDrink()">Ввод информации о напитке</button>
+    <button onclick="getDrink()">Получение информации о напитке</button>
+    <button onclick="deleteDrink()">Удаление информации о напитке</button>
+    <button onclick="getAllDrinks()">Перечень всех напитков</button>
+
+    <script>
+  //1.
+class ObjStorageClass {
+
+    constructor() {
+      this.storage = {};
+    }
+  
+    addValue(key, value) {
+      this.storage[key] = value;
+    }
+  
+    getValue(key) {
+      return this.storage[key];
+    }
+  
+    deleteValue(key) {
+      if (key in this.storage) {
+        delete this.storage[key];
+        return true;
+      }
+      return false;
+    }
+  
+    getKeys() {
+      return Object.keys(this.storage);
+    }
+  }
+  //2.
+  const drinkStorageClass = new ObjStorageClass();
+  //3.
+function addDrink() {
+      const im = prompt("Введите название напитка:");
+      const isAlcoholic = confirm("Это алкогольный напиток?");
+      const recipe = prompt("Введите рецепт приготовления:");
+
+      drinkStorage.addValue(im, { isAlcoholic, recipe });
+    }
+
+  function getDrink() {
+      const im = prompt("Введите название напитка:");
+      const drinkInfo = drinkStorage.getValue(im);
+
+      if (drinkInfo) {
+        alert(`напиток ${im}\n алкогольный: ${drinkInfo.isAlcoholic ? 'да' : 'нет'}\n рецепт приготовления:\n ${drinkInfo.recipe}`);
+      } else {
+        alert(`Напиток ${im} не найден в хранилище.`);
+      }
+    }
+
+  function deleteDrink() {
+      const im = prompt("Введите название напитка:");
+
+      if (drinkStorage.deleteValue(im)) {
+        alert(`Информация о напитке ${im} удалена из хранилища.`);
+      } else {
+        alert(`Напиток ${im} не найден в хранилище.`);
+      }
+    }
+
+  function getAllDrinks() {
+      const allDrinks = drinkStorage.getKeys();
+      alert(`Перечень всех напитков: ${allDrinks.join(', ')}`);
+    }
+ 
+  </script>
+  </body>
+</html>
